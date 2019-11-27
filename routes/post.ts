@@ -8,14 +8,14 @@ const postRoutes = Router();
 const fileSystem = new FileSystem();
 
 // Obtener listado de post
-postRoutes.get('/', verifyToken, async (req: any, res: Response) => {
+postRoutes.get('/', async (req: any, res: Response) => {
 
     // Parametro opcional y si no llega asigna el valor 1
     let pagina = Number(req.query.pagina) || 1;
     let skip = pagina -1;
     skip = skip * 10;
 
-    const post = await Post.find()
+    const posts = await Post.find()
                            .sort({_id: -1})
                            .skip(skip)
                            .limit(10)
@@ -24,7 +24,7 @@ postRoutes.get('/', verifyToken, async (req: any, res: Response) => {
     res.json({
         ok: true,
         pagina,
-        post
+        posts
     });
 
 });
@@ -45,7 +45,7 @@ postRoutes.post('/', verifyToken, (req: any, res: Response) => {
 
         res.json({
             ok: true,
-            post: postDB
+            posts: postDB
         });
     }).catch(err => {
         res.json(err);
