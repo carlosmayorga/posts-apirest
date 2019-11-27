@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import fileupload from 'express-fileupload';
 import cors from 'cors';
-import { compareSync } from 'bcrypt';
 
 const server = new Server();
 
