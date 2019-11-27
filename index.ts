@@ -4,6 +4,8 @@ import postRoutes from './routes/post';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import fileupload from 'express-fileupload';
+import cors from 'cors';
+import { compareSync } from 'bcrypt';
 
 const server = new Server();
 
@@ -14,6 +16,9 @@ server.app.use(bodyParser.json());
 
 // FileUpload
 server.app.use(fileupload());
+
+// Configurar CORSS
+server.app.use(cors({origin: true, credentials: true}));
 
 // Rutas de mi app
 server.app.use('/user', userRoutes);
